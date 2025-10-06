@@ -1,7 +1,7 @@
 function Sistema() {
     this.usuarios = {};
-    this.agregarUsuario = function (nick) {
-        this.usuarios[nick] = new Usuario(nick);
+    this.agregarUsuario = function (nick, email, password) {
+        this.usuarios[nick, email, password] = new Usuario(nick, email, password);
     }
     this.obtenerUsuario = function () {
         return this.usuarios;
