@@ -35,7 +35,7 @@ function Sistema() {
     }
 
     this.numeroUsuarios = function () {
-        return Object.keys(this.usuarios).length;
+        return { "num": Object.keys(this.usuarios).length };
     }
 }
 

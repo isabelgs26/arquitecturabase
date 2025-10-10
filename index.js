@@ -8,7 +8,8 @@ const PORT = process.env.PORT || 3000;
 // Crear instancia del sistema
 let sistema = new modelo.Sistema();
 
-app.use(express.static(__dirname + "/"));
+//app.use(express.static(__dirname + "/"));
+app.use(express.static(__dirname + "/cliente"));
 
 app.get("/", function (request, response) {
     var contenido = fs.readFileSync(__dirname + "/cliente/index.html");
@@ -16,11 +17,14 @@ app.get("/", function (request, response) {
     response.send(contenido);
 });
 
+
 app.get("/agregarUsuario/:nick", function (request, response) {
     let nick = request.params.nick;
     let res = sistema.agregarUsuario(nick);
     response.json(res);
 });
+
+console.log(" Usuarios actuales:", sistema.obtenerUsuarios());
 
 
 app.get("/obtenerUsuarios", function (request, response) {
