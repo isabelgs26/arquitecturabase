@@ -39,8 +39,8 @@ app.get("/usuarioActivo/:nick", function (request, response) {
 });
 
 app.get("/numeroUsuarios", function (request, response) {
-    let num = sistema.numeroUsuarios();
-    response.json({ numeroUsuarios: num });
+    let res = sistema.numeroUsuarios();
+    response.send(res);
 });
 
 app.get("/eliminarUsuario/:nick", function (request, response) {
