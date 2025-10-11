@@ -18,10 +18,12 @@ app.get("/", function (request, response) {
 });
 
 
-app.get("/agregarUsuario/:nick", function (request, response) {
+app.get("/agregarUsuario/:nick/:email/:password", function (request, response) {
     let nick = request.params.nick;
-    let res = sistema.agregarUsuario(nick);
-    response.json(res);
+    let email = request.params.email;
+    let password = request.params.password;
+    let res = sistema.agregarUsuario(nick, email, password);
+    response.send(res);
 });
 
 console.log(" Usuarios actuales:", sistema.obtenerUsuarios());
@@ -34,8 +36,8 @@ app.get("/obtenerUsuarios", function (request, response) {
 
 app.get("/usuarioActivo/:nick", function (request, response) {
     let nick = request.params.nick;
-    let activo = sistema.usuarioActivo(nick);
-    response.json({ nick: nick, activo: activo });
+    let res = sistema.usuarioActivo(nick);
+    response.send(res);
 });
 
 app.get("/numeroUsuarios", function (request, response) {

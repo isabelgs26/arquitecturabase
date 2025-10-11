@@ -1,16 +1,14 @@
 function ClienteRest() {
 
-    this.agregarUsuario = function (nick) {
-        var cli = this;
-        $.getJSON("/agregarUsuario/" + nick, function (data) {
+    this.agregarUsuario = function (nick, email, password) {
+        $.getJSON("/agregarUsuario/" + nick + "/" + email + "/" + password, function (data) {
             if (data.nick != -1) {
-                console.log("Usuario " + nick + " ha sido registrado");
+                console.log("Usuario " + nick + " ha sido registrado con email: " + email);
             } else {
                 console.log("El nick ya está ocupado");
             }
         });
     }
-
     this.agregarUsuario2 = function (nick) {
         $.ajax({
             type: 'GET',

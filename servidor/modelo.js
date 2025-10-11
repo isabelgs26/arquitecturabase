@@ -2,10 +2,10 @@ function Sistema() {
     this.usuarios = {};
     this.contadorId = 1;
 
-    this.agregarUsuario = function (nick) {
+    this.agregarUsuario = function (nick, email, password) {
         let res = { "nick": -1 };
         if (!this.usuarios[nick]) {
-            this.usuarios[nick] = new Usuario(nick);
+            this.usuarios[nick] = new Usuario(nick, email, password);
             res.nick = nick;
         } else {
             console.log("el nick " + nick + " está en uso");
@@ -39,7 +39,9 @@ function Sistema() {
     }
 }
 
-function Usuario(nick) {
+function Usuario(nick, email, password) {
     this.nick = nick;
+    this.email = email;
+    this.password = password;
 }
 module.exports.Sistema = Sistema;
