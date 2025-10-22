@@ -24,8 +24,22 @@ function ControlWeb() {
             }
         });
     }
+    this.salir = function () {
+        //localStorage.removeItem("nick"); location.reload();
+        $.removeCookie("nick");
+        alert("Sesión cerrada correctamente. ¡Hasta pronto!");
+    }
 
-
+    this.comprobarSesion = function () {
+        //let nick = localStorage.getItem("nick");
+        let nick = $.cookie("nick");
+        if (nick) {
+            cw.mostrarMensaje("Bienvenido al sistema, " + nick);
+        }
+        else {
+            cw.mostrarAgregarUsuario();
+        }
+    }
     this.mostrarObtenerUsuarios = function () {
         let cadena = '<div id="mOU" class="form-group">';
         cadena += '<button id="btnOU" type="submit" class="btn btn-info">Obtener Lista de Usuarios</button>';
@@ -128,16 +142,6 @@ function ControlWeb() {
                 alert("Por favor, introduce un nick válido");
             }
         });
-    }
-
-    this.comprobarSesion = function () {
-        let nick = localStorage.getItem("nick");
-        if (nick) {
-            cw.mostrarMensaje("Bienvenido al sistema, " + nick);
-        }
-        else {
-            cw.mostrarAgregarUsuario();
-        }
     }
 
 }
