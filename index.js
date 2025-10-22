@@ -2,6 +2,9 @@ const fs = require("fs");
 const express = require('express');
 const app = express();
 const modelo = require('./servidor/modelo.js');
+const passport = require("passport");
+const cookieSession = require("cookie-session");
+require("./servidor/passport-setup.js");
 
 const PORT = process.env.PORT || 3000;
 
@@ -11,13 +14,19 @@ let sistema = new modelo.Sistema();
 //app.use(express.static(__dirname + "/"));
 app.use(express.static(__dirname + "/cliente"));
 
+app.use(cookieSession({
+    name: 'Sistema',
+    keys: ['key1', 'key2']
+}));
+
 app.get("/", function (request, response) {
     var contenido = fs.readFileSync(__dirname + "/cliente/index.html");
     response.setHeader("Content-type", "text/html");
     response.send(contenido);
 });
-
-
+app.use(passport.initialize());
+app.use(passport.session());
+app.get("/auth/google", passport.authenticate('google', { scope: ['profile', 'email'] }));
 app.get("/agregarUsuario/:nick/:email/:password", function (request, response) {
     let nick = request.params.nick;
     let email = request.params.email;

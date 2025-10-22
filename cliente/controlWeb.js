@@ -1,14 +1,27 @@
 function ControlWeb() {
     this.mostrarAgregarUsuario = function () {
-        let cadena = '<div id="mAU" class="form-group">';
+        $('#bnv').remove();
+        $('#mAU').remove();
+
+        let cadena = '<div id="mAU">';
+        cadena += '<div class="card"><div class="card-body">';
+        cadena += '<div class="form-group">';
         cadena += '<label for="nick">Nick:</label>';
-        cadena += '<input type="text" class="form-control" id="nick">';
-        cadena += '<label for="email" class="mt-2">Email:</label>';
-        cadena += '<input type="email" class="form-control" id="email">';
-        cadena += '<label for="password" class="mt-2">Password:</label>';
-        cadena += '<input type="password" class="form-control" id="password">';
-        cadena += '<button id="btnAU" type="submit" class="btn btn-primary mt-2">Agregar Usuario</button>';
-        cadena += '</div>';
+        cadena += '<p><input type="text" class="form-control" id="nick" placeholder="introduce un nick"></p>';
+
+        // Si quieres usar email y password, hay que agregarlos:
+        cadena += '<label for="email">Email:</label>';
+        cadena += '<p><input type="email" class="form-control" id="email" placeholder="introduce un email"></p>';
+        cadena += '<label for="password">Password:</label>';
+        cadena += '<p><input type="password" class="form-control" id="password" placeholder="introduce una contraseña"></p>';
+
+        cadena += '<button id="btnAU" type="submit" class="btn btn-primary">Submit</button>';
+
+        // Botón de Google
+        cadena += '<div><a href="/auth/google"><img src="./cliente/img/google.png" style="height:40px;"></a></div>';
+
+        cadena += '</div>'; // cierre form-group
+        cadena += '</div></div></div>'; // cierre card-body, card, mAU
 
         $("#au").append(cadena);
 
@@ -16,6 +29,7 @@ function ControlWeb() {
             let nick = $("#nick").val().trim();
             let email = $("#email").val().trim();
             let password = $("#password").val().trim();
+
             if (nick && email && password) {
                 rest.agregarUsuario(nick, email, password);
                 $("#mAU").remove();
@@ -24,6 +38,7 @@ function ControlWeb() {
             }
         });
     }
+
     this.salir = function () {
         //localStorage.removeItem("nick"); location.reload();
         $.removeCookie("nick");
@@ -143,5 +158,7 @@ function ControlWeb() {
             }
         });
     }
+
+
 
 }
